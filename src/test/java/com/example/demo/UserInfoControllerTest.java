@@ -1,5 +1,7 @@
 package com.example.demo;
 
+//addUser controller method testing
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
@@ -15,7 +17,6 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.example.demo.dao.UserRepo;
 import com.example.demo.model.UserInfo;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -35,9 +36,7 @@ public class UserInfoControllerTest {
                                                  
     @MockBean                           
     private UserInfoController userService; 
-    
-    @MockBean
-    private UserRepo repo;	                                                      
+    	                                                      
                                             
     @Test
     public void addUserTest() throws Exception {

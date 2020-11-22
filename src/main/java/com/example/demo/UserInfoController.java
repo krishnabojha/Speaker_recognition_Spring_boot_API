@@ -25,7 +25,6 @@ public class UserInfoController {
 	@Autowired
 	
 	UserRepo repo;
-	CallPrediction prediction;
 	
 	@PostMapping("/addUser")
 	public UserInfo addUser(@RequestBody UserInfo info) {
@@ -45,8 +44,9 @@ public class UserInfoController {
 		fout.write(file.getBytes());
 		fout.close();
 		
-//		make a Spectrogram of the audio file to train the voice
-		String response = prediction.makePrediction(dir_train_name + file.getOriginalFilename(), "train");
+//		make a Spectrogram of the audio file to train the voice flask api call
+		CallPrediction trainVoice = new CallPrediction();
+		String response = trainVoice.makePrediction(dir_train_name + file.getOriginalFilename(), "train");
 		System.out.println("this is train response: "+ response);
 		
 		return new ResponseEntity<>("Audio file uploaded to Train", HttpStatus.OK);
@@ -64,7 +64,8 @@ public class UserInfoController {
 		fout.close();
 		
 //		make a Spectrogram of the audio file sent to test the voice
-		String response = prediction.makePrediction(dir_test_name + file.getOriginalFilename(), "test");
+		CallPrediction trainVoice = new CallPrediction();
+		String response = trainVoice.makePrediction(dir_test_name + file.getOriginalFilename(), "test");
 		System.out.println("this is test response: "+ response);
 		
 //		String[] splited_user_code = file.getOriginalFilename().split("_", 3);
